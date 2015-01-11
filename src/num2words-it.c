@@ -4,7 +4,7 @@
 
 static const char* const ONES[] = {
   "in punto",
-  "una",
+  "uno",
   "due",
   "tre",
   "quattro",
@@ -15,17 +15,34 @@ static const char* const ONES[] = {
   "nove"
 };
 
+static const char* const HOURS[] = {
+  "",
+  "una",
+  "due",
+  "tre",
+  "quattro",
+  "cinque",
+  "sei",
+  "sette",
+  "otto",
+  "nove",
+  "dieci",
+  "undici",
+  "dodici"
+};
+
+
 static const char* const TEENS[] ={
   "",
   "undici",
   "dodici",
   "tredici",
-  "quattordici",
+  "quattor dici",
   "quindici",
   "sedici",
-  "diciassette",
+  "dicias sette",
   "diciotto",
-  "diciannove"
+  "dician nove"
 };
 
 static const char* const TENS[] = {
@@ -41,19 +58,31 @@ static const char* const TENS[] = {
   "novanta"
 };
 
+static size_t append_hour(char* words, int num) {
+  strcat(words, HOURS[num]);
+  return strlen(HOURS[num]);
+}
+
 static size_t append_number(char* words, int num) {
   int tens_val = num / 10 % 10;
   int ones_val = num % 10;
 
   size_t len = 0;
-
+  
   if (tens_val > 0) {
     if (tens_val == 1 && num != 10) {
       strcat(words, TEENS[ones_val]);
       return strlen(TEENS[ones_val]);
     }
-    strcat(words, TENS[tens_val]);
-    len += strlen(TENS[tens_val]);
+    int tens_len = strlen(TENS[tens_val]);
+    if (ones_val == 1 || ones_val == 8){ // special manipulation for truncation
+      strncat(words, TENS[tens_val], tens_len - 1);
+      len += tens_len - 1;
+    }
+    else {
+      strcat(words, TENS[tens_val]);
+      len += strlen(TENS[tens_val]);
+    }
     if (ones_val > 0) {
       strcat(words, " ");
       len += 1;
@@ -83,7 +112,7 @@ void time_to_words(int hours, int minutes, char* words, size_t length) {
   if (hours == 0 || hours == 12) {
     remaining -= append_string(words, remaining, TEENS[2]);
   } else {
-    remaining -= append_number(words, hours % 12);
+    remaining -= append_hour(words, hours % 12);
   }
 
   remaining -= append_string(words, remaining, " ");

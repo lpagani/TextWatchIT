@@ -9,13 +9,13 @@
     "resources": {
         "media": [
             {
-                "file": "fonts/gotham_bold_36.ttf",
-                "name": "FONT_GOTHAM_BOLD_36",
+                "file": "fonts/gotham_light_31.ttf",
+                "name": "FONT_GOTHAM_LIGHT_31",
                 "type": "font"
             },
             {
-                "file": "fonts/gotham_light_31.ttf",
-                "name": "FONT_GOTHAM_LIGHT_31",
+                "file": "fonts/gotham_bold_36.ttf",
+                "name": "FONT_GOTHAM_BOLD_36",
                 "type": "font"
             }
         ]
