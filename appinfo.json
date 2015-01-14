@@ -10,6 +10,11 @@
         "media": [
             {
                 "file": "fonts/gotham_light_31.ttf",
+                "name": "FONT_GOTHAM_LIGHT_28",
+                "type": "font"
+            },
+            {
+                "file": "fonts/gotham_light_31.ttf",
                 "name": "FONT_GOTHAM_LIGHT_31",
                 "type": "font"
             },
@@ -21,7 +26,7 @@
         ]
     },
     "shortName": "TextWatchIT",
-    "uuid": "496e04ad-132a-48ab-b165-7ff4a99872d2",
+    "uuid": "2d37e36e-47ba-423f-810f-6081eea5a3cd",
     "versionCode": 1,
     "versionLabel": "1.0",
     "watchapp": {

@@ -75,7 +75,7 @@ static size_t append_number(char* words, int num) {
       return strlen(TEENS[ones_val]);
     }
     int tens_len = strlen(TENS[tens_val]);
-    if (ones_val == 1 || ones_val == 8){ // special manipulation for truncation
+    if ((ones_val == 1) || (ones_val == 8)){ // special manipulation for truncation
       strncat(words, TENS[tens_val], tens_len - 1);
       len += tens_len - 1;
     }
@@ -142,6 +142,12 @@ void time_to_3words(int hours, int minutes, char *line1, char *line2, char *line
 		start += pch-start+1;
 		pch = strstr(start, " ");
 	}
+  
+  // add third line in between if only two lines are shown
+  if (line3[0] == 0){    
+    memcpy(line3, line2, strlen(line2)+1);
+    memcpy(line2, "e          ", strlen(line2)+1);
+  }
 	
 	// Truncate long teen values
 	if (strlen(line2) > 7) {

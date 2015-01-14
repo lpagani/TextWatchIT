@@ -194,8 +194,10 @@ static void init() {
   window_set_background_color(window, GColorBlack);
 
 	// Custom fonts
-	lightFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_LIGHT_31));
-	boldFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_BOLD_36));
+	lightFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_LIGHT_28));
+	//boldFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_BOLD_36));
+  //lightFont = fonts_get_system_font(FONT_KEY_BITHAM_34_LIGHT_SUBSET);
+  boldFont = fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD);
 
 	// 1st line layers
 	line1.currentLayer = text_layer_create(GRect(0, 18, 144, 50));
@@ -204,8 +206,10 @@ static void init() {
 	configureBoldLayer(line1.nextLayer);
 
 	// 2nd layers
-	line2.currentLayer = text_layer_create(GRect(0, 55, 144, 50));
-	line2.nextLayer = text_layer_create(GRect(144, 55, 144, 50));
+	//line2.currentLayer = text_layer_create(GRect(0, 55, 144, 50));
+	//line2.nextLayer = text_layer_create(GRect(144, 55, 144, 50));
+	line2.currentLayer = text_layer_create(GRect(0, 60, 144, 50));
+	line2.nextLayer = text_layer_create(GRect(144, 60, 144, 50));
 	configureLightLayer(line2.currentLayer);
 	configureLightLayer(line2.nextLayer);
 
