@@ -20,6 +20,11 @@
             },
             {
                 "file": "fonts/gotham_bold_36.ttf",
+                "name": "FONT_GOTHAM_BOLD_40",
+                "type": "font"
+            },
+            {
+                "file": "fonts/gotham_bold_36.ttf",
                 "name": "FONT_GOTHAM_BOLD_36",
                 "type": "font"
             }

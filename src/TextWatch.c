@@ -1,4 +1,4 @@
-#include "pebble.h"
+#include <pebble.h>
 #include "num2words-it.h"
 
 #define DEBUG 1
@@ -93,7 +93,8 @@ static bool needToUpdateLine(Line *line, char lineStr[2][BUFFER_SIZE], char *nex
 	currentStr = (rect.origin.x == 0) ? lineStr[0] : lineStr[1];
 
 	if (memcmp(currentStr, nextValue, strlen(nextValue)) != 0 ||
-		(strlen(nextValue) == 0 && strlen(currentStr) != 0)) {
+      (strlen(nextValue) != strlen(currentStr))) {
+		// (strlen(nextValue) == 0 && strlen(currentStr) != 0)) {
 		return true;
 	}
 	return false;
@@ -195,9 +196,9 @@ static void init() {
 
 	// Custom fonts
 	lightFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_LIGHT_28));
-	//boldFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_BOLD_36));
+	boldFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_BOLD_40));
   //lightFont = fonts_get_system_font(FONT_KEY_BITHAM_34_LIGHT_SUBSET);
-  boldFont = fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD);
+  //boldFont = fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD);
 
 	// 1st line layers
 	line1.currentLayer = text_layer_create(GRect(0, 18, 144, 50));

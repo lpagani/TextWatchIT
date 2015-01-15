@@ -76,17 +76,21 @@ static size_t append_number(char* words, int num) {
     }
     int tens_len = strlen(TENS[tens_val]);
     if ((ones_val == 1) || (ones_val == 8)){ // special manipulation for truncation
-      strncat(words, TENS[tens_val], tens_len - 1);
-      len += tens_len - 1;
+      tens_len --;
+      strncat(words, TENS[tens_val], tens_len);      
     }
     else {
       strcat(words, TENS[tens_val]);
-      len += strlen(TENS[tens_val]);
     }
-    if (ones_val > 0) {
+    
+    len += tens_len;
+    int ones_len = strlen(ONES[ones_val]);
+    if ((ones_val > 0) && ((tens_len + ones_len) > 9)){ //short numbers fit in one line
       strcat(words, " ");
       len += 1;
     }
+   app_log(APP_LOG_LEVEL_ERROR, "num2words-it", 81, "num: %d tens: %d ones %d, tens_len %d ones_len %d, str ::%s::", num, tens_val, ones_val, tens_len, ones_len, words);
+  
   }
 
   if (ones_val > 0 || num == 0) {
@@ -144,17 +148,9 @@ void time_to_3words(int hours, int minutes, char *line1, char *line2, char *line
 	}
   
   // add third line in between if only two lines are shown
-  if (line3[0] == 0){    
+  if (line3[0] == 0){  
     memcpy(line3, line2, strlen(line2)+1);
-    memcpy(line2, "e          ", strlen(line2)+1);
+    memcpy(line2, "e", 1);
+    line2[1] = 0;
   }
-	
-	// Truncate long teen values
-	if (strlen(line2) > 7) {
-		char *pch = strstr(line2, "teen");
-		if (pch) {
-			memcpy(line3, pch, 4);
-			pch[0] = 0;
-		}
-	}
 }
