@@ -33,6 +33,12 @@ static void animationStoppedHandler(struct Animation *animation, bool finished, 
 	GRect rect = layer_get_frame(textLayer);
 	rect.origin.x = 144;
 	layer_set_frame(textLayer, rect);
+  animation_destroy(animation);
+}
+// Animation handler (for next layer)
+static void animationStoppedHandler2(struct Animation *animation, bool finished, void *context)
+{
+  animation_destroy(animation);
 }
 
 // Animate line
@@ -45,8 +51,12 @@ static void makeAnimationsForLayers(Line *line, TextLayer *current, TextLayer *n
 	line->nextAnimation = property_animation_create_layer_frame(text_layer_get_layer(next), &fromRect, &toRect);
 	animation_set_duration((Animation *)line->nextAnimation, 400);
 	animation_set_curve((Animation *)line->nextAnimation, AnimationCurveEaseOut);
+	 animation_set_handlers((Animation *)line->nextAnimation, (AnimationHandlers) {
+		.stopped = (AnimationStoppedHandler)animationStoppedHandler2
+	}, next);
 	animation_schedule((Animation *)line->nextAnimation);
-	
+  
+  	
 	GRect fromRect2 = layer_get_frame(text_layer_get_layer(current));
 	GRect toRect2 = fromRect2;
 	toRect2.origin.x -= 144;
@@ -83,6 +93,7 @@ static void updateLineTo(Line *line, char lineStr[2][BUFFER_SIZE], char *value)
 	}
 	
 	makeAnimationsForLayers(line, current, next);
+ 
 }
 
 // Check to see if the current line needs to be updated
@@ -195,8 +206,9 @@ static void init() {
   window_set_background_color(window, GColorBlack);
 
 	// Custom fonts
-	lightFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_LIGHT_28));
-	boldFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_BOLD_40));
+	lightFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_LIGHT_31));
+	boldFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_BOLD_36));
+ 	
   //lightFont = fonts_get_system_font(FONT_KEY_BITHAM_34_LIGHT_SUBSET);
   //boldFont = fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD);
 

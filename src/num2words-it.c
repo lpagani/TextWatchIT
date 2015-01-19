@@ -1,4 +1,3 @@
-#include <pebble.h>
 #include "num2words-it.h"
 #include "string.h"
 
@@ -89,7 +88,7 @@ static size_t append_number(char* words, int num) {
       strcat(words, " ");
       len += 1;
     }
-   app_log(APP_LOG_LEVEL_ERROR, "num2words-it", 81, "num: %d tens: %d ones %d, tens_len %d ones_len %d, str ::%s::", num, tens_val, ones_val, tens_len, ones_len, words);
+   //app_log(APP_LOG_LEVEL_INFO, "num2words-it", 81, "num: %d tens: %d ones %d, tens_len %d ones_len %d, str ::%s::", num, tens_val, ones_val, tens_len, ones_len, words);
   
   }
 
@@ -148,7 +147,7 @@ void time_to_3words(int hours, int minutes, char *line1, char *line2, char *line
 	}
   
   // add third line in between if only two lines are shown
-  if (line3[0] == 0){  
+  if (line3[0] == 0){
     memcpy(line3, line2, strlen(line2)+1);
     memcpy(line2, "e", 1);
     line2[1] = 0;
